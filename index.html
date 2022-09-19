@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"
+      integrity="sha512-42PE0rd+wZ2hNXftlM78BSehIGzezNeQuzihiBCvUEB3CVxHvsShF86wBWwQORNxNINlBPuq7rG4WWhNiTVHFg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" id="date" />
+
+    <script>
+
+async function main(){
+  let baseUrl = 'https://service.mediastudio.hk'
+
+  let queryId = getQueryId(window.location.href)
+  console.log(queryId)
+  let sessions = await fetch(`${baseUrl}/sessions/employee/by-id/${queryId}`)
+  console.log(sessions)
+}
+        // async function main() {
+        //   let baseUrl = "https://service.mediastudio.hk";
+        //   let allSessionUrl = `${baseUrl}/sessions/all`;
+        //   let empRecordsArr = [];
+        //
+        //   let WORK_SESSION_TYPE = "Work Session";
+        //
+        //   //employee
+        //   let allEmployeeUrl = `${baseUrl}/employee/all`;
+        //   let allEmployeeRecord = await fetch(allEmployeeUrl)
+        //     .then((r) => r.json())
+        //     .then((r) => r.record);
+        //   // console.log(allEmployeeRecord)
+        //
+        //   for (const empRecord of allEmployeeRecord) {
+        //     let fields = empRecord.fields;
+        //     let record = {};
+        //     record.userRecordId = empRecord.id;
+        //     record.ID = fields.ID;
+        //     record.telegramName = fields["Telegram Username"];
+        //     record.timezone = fields["Timezone"];
+        //     record.team = fields["Team Name (from Teams)"][0];
+        //     // gonna be pushing all the session by record_id to this array
+        //     record.sessions = [];
+        //     empRecordsArr.push(record);
+        //   }
+        //   // console.log(empRecordsArr)
+        //
+        //   // sessions
+        //   let allSessions = await fetch(allSessionUrl)
+        //     .then((r) => r.json())
+        //     .then((r) => r.record);
+        //   // console.log(`All Sessions:`)
+        //   // console.log(allSessions)
+        //
+        //   for (let session of allSessions) {
+        //     const { fields } = session;
+        //     let userRecordId = fields["Affected User ID"][0];
+        //
+        //     let sessionObj = {};
+        //     sessionObj.duration = fields["Duration (Hours)"];
+        //     sessionObj.sessionType = fields["Session Type"];
+        //     sessionObj.beginDate = fields["Begin Date"];
+        //     sessionObj.endDate = fields["End Date"];
+        //
+        //     // console.log(sessionObj)
+        //
+        //     for (let empRecord of empRecordsArr) {
+        //       if (empRecord.userRecordId === userRecordId) {
+        //         empRecord.sessions.push(sessionObj);
+        //         break;
+        //       }
+        //     }
+        //   }
+        //
+        //   // getting total duration, meaning loop through session type: work, and add all the duration hours
+        //   // getting total number of days worked, using moment js, create a set, format each check-in time to dd/mm/yyyy, and finally do set.size
+        //
+        //   for (let empRecord of empRecordsArr) {
+        //     const { sessions } = empRecord;
+        //     let totalHours = 0;
+        //     let totalDaysWorked = new Set();
+        //
+        //     sessions.forEach((session) => {
+        //       if (session.sessionType === WORK_SESSION_TYPE) {
+        //         // total hours wored
+        //         totalHours += session.duration;
+        //
+        //         // total days worked
+        //         let day = moment(session.beginDate).format("DD-MM-YYYY");
+        //
+        //         totalDaysWorked.add(day);
+        //       }
+        //     });
+        //
+        //     empRecord.totalHours = Math.round(totalHours);
+        //     empRecord.numberOfWorkDays = totalDaysWorked.size;
+        //   }
+        //
+        //   console.log(empRecordsArr);
+        // }
+
+        // first record id: recM33finOrsduvt9
+          main().then((r) => console.log("finished"));
+    </script>
+  </body>
+</html>
